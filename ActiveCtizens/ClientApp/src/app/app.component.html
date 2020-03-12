@@ -1,0 +1,17 @@
+<body>
+  <div>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="createMarker($event)">
+      <agm-marker [iconUrl]="(marker.solved==true)?'./assets/icon.png':''"
+                  *ngFor="let marker of markers"
+                  [latitude]="marker.latitude"
+                  [longitude]="marker.longitude">
+        <agm-info-window>
+          <p>{{marker.description}}</p>
+          <button mat-button mat-raised-button (click)="solve(marker)" color="primary">Solved</button>
+
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+  
+</body>

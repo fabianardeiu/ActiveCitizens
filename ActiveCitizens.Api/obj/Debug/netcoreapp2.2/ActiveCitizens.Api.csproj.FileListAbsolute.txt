@@ -1,0 +1,15 @@
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp2.2\ActiveCitizens.Api.csprojAssemblyReference.cache
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp2.2\ActiveCitizens.Api.AssemblyInfoInputs.cache
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp2.2\ActiveCitizens.Api.AssemblyInfo.cs
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Api.deps.json
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Api.runtimeconfig.json
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Api.runtimeconfig.dev.json
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Api.dll
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Core.dll
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Models.dll
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Core.pdb
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp2.2\ActiveCitizens.Models.pdb
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp2.2\ActiveCitizens.Api.csproj.CopyComplete
