@@ -10,32 +10,35 @@ import { Marker } from '../models/marker';
     templateUrl: './add-marker-pop-up.component.html',
     styleUrls: ['./add-marker-pop-up.component.scss']
 })
-/** add-marker-pop-up component*/
+
 export class AddMarkerPopUpComponent implements OnInit {
   marker: Marker;
   markerForm: FormGroup;
-
+  
   constructor(
     public dialogRef: MatDialogRef<AddMarkerPopUpComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddMarkerDialogData,
-    private httpClient: HttpClient,
     private fb: FormBuilder,) {
   }
 
   ngOnInit(): void {
+    this.marker = new Marker();
     this.markerForm = this.fb.group({
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
     });
+  }
+
+  onFileChanged(event) {
+    this.marker.image = event.target.files[0];
   }
 
   onConfirm() {
     if (this.markerForm.valid) {
-      this.marker = new Marker();
       this.marker.description = this.markerForm.get('description').value;
       this.marker.latitude = this.data.marker.latitude;
       this.marker.longitude = this.data.marker.longitude;
       this.dialogRef.close(this.marker);
-
+      this.marker = new Marker();
     }
   }
 

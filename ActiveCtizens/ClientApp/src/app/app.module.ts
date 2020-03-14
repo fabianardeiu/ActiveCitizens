@@ -8,9 +8,11 @@ import { MatDialogModule, } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AddMarkerPopUpComponent } from './add-marker-pop-up/add-marker-pop-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   declarations: [
@@ -22,14 +24,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBu2DZzbcRGYvnzpE7XVlkY0F6tHvlXg3Q'
+      apiKey: 'AIzaSyB6GqnWEojyUS6LUvP11qr5_SjRTnMLjXk'
     }),
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AgmDirectionModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

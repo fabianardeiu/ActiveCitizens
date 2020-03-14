@@ -12,7 +12,6 @@ namespace ActiveCitizens.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("AllowAll")]
     public class MarkerController : Controller
     {
         private IMarkerRepository _markerRepo;
@@ -56,6 +55,20 @@ namespace ActiveCitizens.Api.Controllers
         {
             _markerRepo.DeleteById(id);
             return Ok("Marker deleted");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateMarker([FromBody] Marker marker)
+        {
+            if (ModelState.IsValid)
+            {
+                _markerRepo.Update(marker);
+                return Ok("Marker updated");
+            }
+            else
+            {
+                return BadRequest("Model state is not valid");
+            }
         }
     }
 }

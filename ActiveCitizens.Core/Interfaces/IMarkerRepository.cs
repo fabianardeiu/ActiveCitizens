@@ -11,6 +11,7 @@ namespace ActiveCitizens.Core.Interfaces
         IEnumerable<Marker> GetAll();
         Marker GetById(int id);
         void DeleteById(int id);
+        void Update(Marker marker);
 
     }
 }

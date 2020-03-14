@@ -19,6 +19,7 @@ namespace ActiveCitizens.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,15 +35,18 @@ namespace ActiveCitizens.Api
             services.AddDbContext<ActiveCitizensContext>();
             services.AddScoped<IMarkerRepository, MarkerRepository>();
 
+
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll", p =>
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
                 {
-                    p.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    builder.AllowAnyOrigin();
                 });
             });
+
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +57,6 @@ namespace ActiveCitizens.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
 
             app.UseRouting();
@@ -65,7 +68,11 @@ namespace ActiveCitizens.Api
                 endpoints.MapControllers();
             });
 
-            app.UseCors("AllowAll");
+            app.UseCors(MyAllowSpecificOrigins);
+            app.UseHttpsRedirection();
+
+            app.UseMvc();
+
         }
     }
 }

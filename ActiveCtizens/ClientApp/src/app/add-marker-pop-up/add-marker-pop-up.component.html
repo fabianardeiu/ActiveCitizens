@@ -1,13 +1,16 @@
 <form [formGroup]="markerForm">
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field style="width: 100%">
       <input matInput
              placeholder="Description"
              formControlName="description" />
     </mat-form-field>
+      <input type="file"
+             (change)="onFileChanged($event)"
+             accept="image/jpeg"/>
   </mat-dialog-content>
   <mat-dialog-actions class="justify-content-end">
-    <button mat-button mat-raised-button type="submit" (click)="onConfirm()" color="primary">Save</button>
-    <button mat-button mat-raised-button type="button" (click)="onDecline()">Back</button>
+    <button mat-button mat-raised-button type="submit" (click)="onConfirm()" color="primary" class="btn">Save</button>
+    <button mat-button mat-raised-button type="button" (click)="onDecline()" class="btn">Back</button>
   </mat-dialog-actions>
 </form>

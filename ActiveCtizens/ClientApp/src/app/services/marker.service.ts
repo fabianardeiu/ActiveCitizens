@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
 
 export class MarkerService {
   private baseUrl = 'api/marker';
-  private readonly apiHost = 'http://localhost:5003';
+  private readonly apiHost = 'https://localhost:5004';
 
   constructor(private httpClient: HttpClient) {
   }
 
   getAll(): Observable<Marker[]> {
     return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}`);
+  }
+
+  createMaker(marker: Marker) {
+    return this.httpClient.post(`${this.apiHost}/${this.baseUrl}`, marker);
+
   }
 }

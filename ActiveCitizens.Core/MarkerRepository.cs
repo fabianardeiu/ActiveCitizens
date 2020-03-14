@@ -1,5 +1,6 @@
 ﻿using ActiveCitizens.Core.Interfaces;
 using ActiveCitizens.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,14 @@ namespace ActiveCitizens.Core
         {
             var marker = _context.Markers.FirstOrDefault(m => m.Id == id);
             return marker;
+        }
+
+        public void Update(Marker marker)
+        {
+            _context.Attach(marker);
+            var entry = _context.Entry(marker);
+            entry.State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
