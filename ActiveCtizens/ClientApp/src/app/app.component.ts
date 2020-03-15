@@ -31,7 +31,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //this.markerService.getAll().subscribe(res => console.log(res));
+    this.markerService.getAll().subscribe(res => console.log(res));
   }
 
   createMarker(event) {
@@ -52,6 +52,7 @@ export class AppComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.markers.push(result);
+        this.markerService.createMaker(result).subscribe(res => console.log(res));
       }
     });
     dialogRef = null;
