@@ -14,7 +14,7 @@ import { Marker } from '../models/marker';
 export class AddMarkerPopUpComponent implements OnInit {
   marker: Marker;
   markerForm: FormGroup;
-  
+
   constructor(
     public dialogRef: MatDialogRef<AddMarkerPopUpComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddMarkerDialogData,

@@ -45,12 +45,12 @@ namespace ActiveCitizens.Core
             return marker;
         }
 
-        public void Update(Marker marker)
+        public Marker Solve(int markerId)
         {
-            _context.Attach(marker);
-            var entry = _context.Entry(marker);
-            entry.State = EntityState.Modified;
+            var marker = _context.Markers.FirstOrDefault(m => m.Id == markerId);
+            marker.Solved = true;
             _context.SaveChanges();
+            return marker;
         }
     }
 }

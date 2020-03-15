@@ -57,18 +57,11 @@ namespace ActiveCitizens.Api.Controllers
             return Ok("Marker deleted");
         }
 
-        [HttpPut]
-        public IActionResult UpdateMarker([FromBody] Marker marker)
+        [HttpGet("{markerId}/solve")]
+        public IActionResult SolveMarker(int markerId)
         {
-            if (ModelState.IsValid)
-            {
-                _markerRepo.Update(marker);
-                return Ok("Marker updated");
-            }
-            else
-            {
-                return BadRequest("Model state is not valid");
-            }
+            var solvedMarker = _markerRepo.Solve(markerId);
+            return Ok(solvedMarker);
         }
     }
 }

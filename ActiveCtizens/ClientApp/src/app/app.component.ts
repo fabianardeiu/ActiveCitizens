@@ -31,7 +31,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.markerService.getAll().subscribe(res => console.log(res));
+    this.markerService.getAll().subscribe(res => this.markers = res);
   }
 
   createMarker(event) {
@@ -51,14 +51,15 @@ export class AppComponent implements OnInit{
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.markers.push(result);
-        this.markerService.createMaker(result).subscribe(res => console.log(res));
+        this.markerService.createMarker(result).subscribe(res => this.markers.push(res));
       }
     });
     dialogRef = null;
   }
 
   solve(marker: Marker) {
+    marker.solved = true;
+    this.markerService.solveMarker(marker.id).subscribe();
     this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).solved = true;
   }
 

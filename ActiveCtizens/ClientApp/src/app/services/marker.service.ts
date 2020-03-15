@@ -18,8 +18,11 @@ export class MarkerService {
     return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}`);
   }
 
-  createMaker(marker: Marker) {
-    return this.httpClient.post(`${this.apiHost}/${this.baseUrl}`, marker);
+  createMarker(marker: Marker) {
+    return this.httpClient.post<Marker>(`${this.apiHost}/${this.baseUrl}`, marker);
+  }
 
+  solveMarker(markerId) {
+    return this.httpClient.get<Marker>(`${this.apiHost}/${this.baseUrl}/`+ markerId + `/solve`);
   }
 }
