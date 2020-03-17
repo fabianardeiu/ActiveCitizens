@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ActiveCitizens.Core.Dto;
 using ActiveCitizens.Core.Interfaces;
 using ActiveCitizens.Models;
 using Microsoft.AspNetCore.Cors;
@@ -36,10 +37,23 @@ namespace ActiveCitizens.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMarker([FromBody] Marker marker)
+        public IActionResult CreateMarker([FromBody] MarkerDto markerDto)
         {
             if (ModelState.IsValid)
             {
+                Marker marker = new Marker
+                {
+                    Id = markerDto.Id,
+                    Description = markerDto.Description,
+                    Latitude = markerDto.Latitude,
+                    Longitude = markerDto.Longitude,
+                    Solved = markerDto.Solved
+                };
+                if (markerDto.Image != null)
+                {
+                    marker.Image = Convert.FromBase64String(markerDto.Image);
+                }
+
                 var createdMarker = _markerRepo.Add(marker);
                 return Ok(createdMarker);
             }

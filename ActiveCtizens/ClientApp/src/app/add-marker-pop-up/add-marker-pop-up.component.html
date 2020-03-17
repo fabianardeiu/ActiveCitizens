@@ -5,9 +5,14 @@
              placeholder="Description"
              formControlName="description" />
     </mat-form-field>
-      <input type="file"
-             (change)="onFileChanged($event)"
-             accept="image/jpeg"/>
+   
+    <input type="file"
+           formControlName="image"
+           (change)="onFileChanged($event)"
+           accept="image/jpeg"/>
+    <div *ngIf="imageRequired">
+      <span class="error-message">Please upload an image</span>
+    </div>
   </mat-dialog-content>
   <mat-dialog-actions class="justify-content-end">
     <button mat-button mat-raised-button type="submit" (click)="onConfirm()" color="primary" class="btn">Save</button>

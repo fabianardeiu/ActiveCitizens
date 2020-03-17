@@ -14,7 +14,7 @@ import { Marker } from '../models/marker';
 export class AddMarkerPopUpComponent implements OnInit {
   marker: Marker;
   markerForm: FormGroup;
-
+  imageRequired: boolean;
   constructor(
     public dialogRef: MatDialogRef<AddMarkerPopUpComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddMarkerDialogData,
@@ -25,11 +25,18 @@ export class AddMarkerPopUpComponent implements OnInit {
     this.marker = new Marker();
     this.markerForm = this.fb.group({
       description: ['', [Validators.required]],
+      image: ['', [Validators.required]]
     });
   }
 
   onFileChanged(event) {
-    this.marker.image = event.target.files[0];
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onload = () => {
+      this.marker.image = reader.result.slice(23);
+    };
+    reader.readAsDataURL(file);
+    this.imageRequired = false;
   }
 
   onConfirm() {
@@ -39,12 +46,14 @@ export class AddMarkerPopUpComponent implements OnInit {
       this.marker.longitude = this.data.marker.longitude;
       this.dialogRef.close(this.marker);
       this.marker = new Marker();
+    } else {
+      if (this.marker.image == null) {
+        this.imageRequired = true;
+      }
     }
   }
 
   onDecline() {
     this.dialogRef.close(false);
   }
-
-
 }

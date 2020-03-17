@@ -5,30 +5,34 @@
     </mat-toolbar>
   </div>
   <div>
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="createMarker($event)">
+    <agm-map [latitude]="lat"
+             [longitude]="lng"
+             [zoom]="zoom"
+             (mapClick)="createMarker($event);">
 
       <agm-marker [iconUrl]="(marker.solved==true)?'./assets/icon.png':''"
                   *ngFor="let marker of markers"
                   [latitude]="marker.latitude"
                   [longitude]="marker.longitude">
         <agm-info-window>
-          <div style="padding:10px;">
-            <h4 class="description">{{marker.description}}</h4>
-            <hr />
-            <img class="img" [src]="marker.image">
-            <button mat-raised-button
-                    (click)="getDirection(marker)"
-                    class="btn">
-              Direction
-            </button>
-            <button mat-raised-button
-                    *ngIf="!marker.solved"
-                    (click)="solve(marker)"
-                    color="primary"
-                    class="btn">
-              Solved
-            </button>
-          </div>
+            <div class="info-window-details">
+              <h4>{{marker.description}}</h4>
+              <hr />
+              <img [src]="marker.image">
+              <hr />
+            </div>
+            <div class="info-window-actions"
+                      *ngIf="!marker.solved">
+              <button mat-raised-button
+                      (click)="getDirection(marker)">
+                Direction
+              </button>
+              <button mat-raised-button
+                      (click)="solve(marker)"
+                      color="primary">
+                Solved
+              </button>
+            </div>
         </agm-info-window>
       </agm-marker>
       <agm-direction *ngIf="origin!=undefined" [origin]="origin" [destination]="destination" [visible]="true"></agm-direction>

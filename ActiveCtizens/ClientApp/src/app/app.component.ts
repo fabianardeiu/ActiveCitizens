@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Marker } from './models/marker';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMarkerPopUpComponent } from './add-marker-pop-up/add-marker-pop-up.component';
 import { MarkerService } from './services/marker.service';
-import { Location } from './models/location';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +29,10 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.markerService.getAll().subscribe(res => this.markers = res);
+    this.markerService.getAll().subscribe(res => res.forEach(m => {
+      m.image = "data:image/jpeg;base64," + m.image;
+      this.markers = res;
+    }))
   }
 
   createMarker(event) {
@@ -51,7 +52,10 @@ export class AppComponent implements OnInit{
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.markerService.createMarker(result).subscribe(res => this.markers.push(res));
+        this.markerService.createMarker(result).subscribe(res => {
+          res.image = "data:image/jpeg;base64," + res.image;
+          this.markers.push(res);
+        })
       }
     });
     dialogRef = null;
