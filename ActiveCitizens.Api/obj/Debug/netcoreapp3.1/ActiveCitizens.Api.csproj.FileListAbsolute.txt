@@ -127,3 +127,5 @@ C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\n
 C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp3.1\ActiveCitizens.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp3.1\ActiveCitizens.Api.csproj.CoreCompileInputs.cache
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Api\obj\Debug\netcoreapp3.1\ActiveCitizens.Api.genruntimeconfig.cache

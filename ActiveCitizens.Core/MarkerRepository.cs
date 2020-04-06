@@ -36,7 +36,8 @@ namespace ActiveCitizens.Core
 
         public IEnumerable<Marker> GetAll()
         {
-            return _context.Markers;
+            return _context.Markers
+                .Where(m => m.ResolvedAt == null || m.ResolvedAt > DateTime.Now.AddDays(-7));
         }
 
         public Marker GetById(int id)
@@ -49,6 +50,7 @@ namespace ActiveCitizens.Core
         {
             var marker = _context.Markers.FirstOrDefault(m => m.Id == markerId);
             marker.Solved = true;
+            marker.ResolvedAt = DateTime.Now;
             _context.SaveChanges();
             return marker;
         }

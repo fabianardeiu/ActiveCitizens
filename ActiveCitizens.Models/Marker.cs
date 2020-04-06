@@ -12,5 +12,6 @@ namespace ActiveCitizens.Models
         public string Description { get; set; }
         public bool Solved { get; set; }
         public byte[] Image { get; set; }
+        public DateTime? ResolvedAt { get; set; }
     }
 }

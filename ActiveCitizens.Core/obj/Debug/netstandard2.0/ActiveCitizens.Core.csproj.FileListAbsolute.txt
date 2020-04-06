@@ -9,3 +9,4 @@ C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Core\bin\Debug\
 C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Core\obj\Debug\netstandard2.0\ActiveCitizens.Core.csproj.CopyComplete
 C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Core\obj\Debug\netstandard2.0\ActiveCitizens.Core.dll
 C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Core\obj\Debug\netstandard2.0\ActiveCitizens.Core.pdb
+C:\Users\fabian.ardeiu\source\repos\ActiveCtizens\ActiveCitizens.Core\obj\Debug\netstandard2.0\ActiveCitizens.Core.csproj.CoreCompileInputs.cache
