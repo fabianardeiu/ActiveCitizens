@@ -10,14 +10,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AddMarkerPopUpComponent } from './add-marker-pop-up/add-marker-pop-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmDirectionModule } from 'agm-direction';
 import { AppRoutingModule } from './app-routing.module';
+import { MatCardModule } from '@angular/material/card';
+import { MapComponent } from './map/map/map.component';
+import { LoginComponent } from './login/login/login.component';
+import { AddMarkerPopUpComponent } from './map/add-marker-pop-up/add-marker-pop-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MapComponent,
+    LoginComponent,
     AddMarkerPopUpComponent
   ],
   imports: [
@@ -36,7 +41,8 @@ import { AppRoutingModule } from './app-routing.module';
     AgmDirectionModule,
     MatIconModule,
     MatToolbarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

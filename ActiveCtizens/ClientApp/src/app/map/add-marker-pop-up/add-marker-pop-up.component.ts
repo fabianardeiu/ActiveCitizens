@@ -1,9 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddMarkerDialogData } from './add-marker-dialog-data';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Marker } from '../models/marker';
+import { Marker } from '../../models/marker';
 
 @Component({
     selector: 'app-add-marker-pop-up',

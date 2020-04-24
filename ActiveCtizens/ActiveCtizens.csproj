@@ -25,13 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\add-marker-pop-up\add-marker-dialog-data.ts" />
+    <None Remove="ClientApp\src\app\map\add-marker-pop-up\add-marker-dialog-data.ts" />
     <None Remove="ClientApp\src\app\models\location.ts" />
     <None Remove="ClientApp\src\app\models\marker.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\add-marker-pop-up\add-marker-dialog-data.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\map\add-marker-pop-up\add-marker-dialog-data.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\location.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\marker.ts" />
   </ItemGroup>

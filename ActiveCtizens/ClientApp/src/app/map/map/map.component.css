@@ -1,0 +1,27 @@
+agm-map {
+  height: 100vh;
+}
+
+.info-window-details h4{
+  text-align: center;
+}
+
+span {
+  color: #8a8b8b;
+  display: block;
+}
+
+img {
+  height: 10em;
+}
+
+
+.info-window-actions {
+  padding-top: 1em;
+  float: right;
+  
+}
+
+.info-window-actions button {
+  margin: 0 0.5em 0.3em 0;
+}
