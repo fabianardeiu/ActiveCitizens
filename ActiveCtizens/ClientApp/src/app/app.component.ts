@@ -62,9 +62,10 @@ export class AppComponent implements OnInit{
   }
 
   solve(marker: Marker) {
-    marker.solved = true;
-    this.markerService.solveMarker(marker.id).subscribe();
-    this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).solved = true;
+    this.markerService.solveMarker(marker.id).subscribe(res => {
+      this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).solved = true;
+      this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).resolvedAt = res.resolvedAt;
+    });
   }
 
   getDirection(marker: Marker) {

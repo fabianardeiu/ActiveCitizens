@@ -19,6 +19,7 @@ namespace ActiveCitizens.Core
 
         public Marker Add(Marker marker)
         {
+            marker.CreatedAt = DateTime.Now;
             _context.Markers.Add(marker);
             _context.SaveChanges();
             return marker;

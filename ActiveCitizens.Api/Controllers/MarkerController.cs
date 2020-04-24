@@ -47,7 +47,7 @@ namespace ActiveCitizens.Api.Controllers
                     Description = markerDto.Description,
                     Latitude = markerDto.Latitude,
                     Longitude = markerDto.Longitude,
-                    Solved = markerDto.Solved
+                    Solved = markerDto.Solved,
                 };
                 if (markerDto.Image != null)
                 {

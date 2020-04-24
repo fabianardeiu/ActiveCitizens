@@ -15,12 +15,14 @@
                   [latitude]="marker.latitude"
                   [longitude]="marker.longitude">
         <agm-info-window>
-            <div class="info-window-details">
-              <h4>{{marker.description}}</h4>
-              <hr />
-              <img [src]="marker.image">
-              <hr />
-            </div>
+          <div class="info-window-details">
+
+            <h4>{{marker.description}}</h4>
+            <span>Created: {{marker.createdAt | date: 'dd-MMM-yyyy HH:mm'}}</span>
+            <span *ngIf="marker.resolvedAt">Resolved: {{marker.resolvedAt | date: 'dd-MMM-yyyy HH:mm'}}</span>
+            <hr />
+            <img [src]="marker.image">
+          </div>
             <div class="info-window-actions"
                       *ngIf="!marker.solved">
               <button mat-raised-button

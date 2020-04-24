@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AddMarkerPopUpComponent } from './add-marker-pop-up/add-marker-pop-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmDirectionModule } from 'agm-direction';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AgmDirectionModule } from 'agm-direction';
     BrowserAnimationsModule,
     AgmDirectionModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

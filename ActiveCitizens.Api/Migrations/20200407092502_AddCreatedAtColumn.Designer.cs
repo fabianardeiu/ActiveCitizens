@@ -5,14 +5,16 @@ using ActiveCitizens.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ActiveCitizens.Api.Migrations
 {
     [DbContext(typeof(ActiveCitizensContext))]
-    partial class ActiveCitizensContextModelSnapshot : ModelSnapshot
+    [Migration("20200407092502_AddCreatedAtColumn")]
+    partial class AddCreatedAtColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
