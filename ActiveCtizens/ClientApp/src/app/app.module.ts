@@ -42,7 +42,7 @@ import { AddMarkerPopUpComponent } from './map/add-marker-pop-up/add-marker-pop-
     MatIconModule,
     MatToolbarModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

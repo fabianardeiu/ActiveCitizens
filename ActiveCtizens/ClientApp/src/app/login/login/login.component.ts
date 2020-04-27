@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  error: boolean;
 
   constructor(
     private router: Router,
@@ -20,14 +21,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   login() {
     if (this.form.valid && this.form.controls['username'].value == 'fabi' && this.form.controls['password'].value == '1') {
       this.router.navigate(['map']);
+    } else if (this.form.valid) {
+      this.error = true;
+    } else {
+      this.form.markAllAsTouched;
     }
   }
 
