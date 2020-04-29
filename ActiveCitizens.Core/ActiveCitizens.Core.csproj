@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200429150311_AddedResolvedByProperyOnMarkersTable.cs" />
+    <Compile Remove="Migrations\20200429150311_AddedResolvedByProperyOnMarkersTable.Designer.cs" />
+    <Compile Remove="Migrations\20200429150624_AddedResolvedByProperyOnMarkersTable.cs" />
+    <Compile Remove="Migrations\20200429150624_AddedResolvedByProperyOnMarkersTable.Designer.cs" />
+    <Compile Remove="Migrations\20200429151532_AddedResolvedByProperyOnMarkersTable.cs" />
+    <Compile Remove="Migrations\20200429151532_AddedResolvedByProperyOnMarkersTable.Designer.cs" />
+    <Compile Remove="Migrations\20200429151721_AddedResolvedByProperyOnMarkersTable.cs" />
+    <Compile Remove="Migrations\20200429151721_AddedResolvedByProperyOnMarkersTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />

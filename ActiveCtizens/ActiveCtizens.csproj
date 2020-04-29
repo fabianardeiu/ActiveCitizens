@@ -29,6 +29,7 @@
     <None Remove="ClientApp\src\app\models\citizen.ts" />
     <None Remove="ClientApp\src\app\models\location.ts" />
     <None Remove="ClientApp\src\app\models\marker.ts" />
+    <None Remove="ClientApp\src\app\models\solve-marker.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
   </ItemGroup>
 
@@ -36,6 +37,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\map\add-marker-pop-up\add-marker-dialog-data.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\citizen.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\marker.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\solve-marker.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
   </ItemGroup>
 

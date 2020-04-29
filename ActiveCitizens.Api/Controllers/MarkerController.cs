@@ -32,7 +32,7 @@ namespace ActiveCitizens.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetMarkerById(int id)
+        public IActionResult GetMarkerById(Guid id)
         {
             var marker = _markerRepo.GetById(id);
             return Ok(marker);
@@ -54,16 +54,16 @@ namespace ActiveCitizens.Api.Controllers
         }
      
         [HttpDelete("{id}")]
-        public IActionResult DeleteMarker(int id)
+        public IActionResult DeleteMarker(Guid id)
         {
             _markerRepo.DeleteById(id);
             return Ok("Marker deleted");
         }
 
         [HttpPut("solve")]
-        public ActionResult<MarkerViewModel> SolveMarker([FromBody] int markerId)
+        public ActionResult<MarkerViewModel> SolveMarker([FromBody] SolveMarkerDto solveMarkerDto)
         {
-            var solvedMarker = _markerRepo.Solve(markerId);
+            var solvedMarker = _markerRepo.Solve(solveMarkerDto.MarkerId, solveMarkerDto.Citizen);
             return Ok(solvedMarker);
         }
     }

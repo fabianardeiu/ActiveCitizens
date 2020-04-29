@@ -4,14 +4,16 @@ using ActiveCitizens.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ActiveCitizens.Core.Migrations
 {
     [DbContext(typeof(ActiveCitizensContext))]
-    partial class ActiveCitizensContextModelSnapshot : ModelSnapshot
+    [Migration("20200429152034_AddedResolvedByProperyOnMarkersTable")]
+    partial class AddedResolvedByProperyOnMarkersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace ActiveCitizens.Core.Migrations
 
             modelBuilder.Entity("ActiveCitizens.Models.Marker", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("MarkerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -71,7 +73,7 @@ namespace ActiveCitizens.Core.Migrations
                     b.Property<bool>("Solved")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("MarkerId");
 
                     b.HasIndex("CreatedByCitizenId");
 

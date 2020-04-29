@@ -43,7 +43,7 @@ export class AddMarkerPopUpComponent implements OnInit {
       this.marker.description = this.markerForm.get('description').value;
       this.marker.latitude = this.data.marker.latitude;
       this.marker.longitude = this.data.marker.longitude;
-      this.marker.citizen = localStorage.getItem('citizen');
+      this.marker.createdByCitizen = localStorage.getItem('citizen');
       this.dialogRef.close(this.marker);
       this.marker = new Marker();
     } else {

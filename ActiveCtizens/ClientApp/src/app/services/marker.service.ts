@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Marker } from '../models/marker';
 import { Observable } from 'rxjs';
+import { SolveMarker } from '../models/solve-marker';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class MarkerService {
     return this.httpClient.post<Marker>(`${this.apiHost}/${this.baseUrl}`, marker);
   }
 
-  solveMarker(markerId) {
-    return this.httpClient.put<Marker>(`${this.apiHost}/${this.baseUrl}/solve`, markerId);
+  solveMarker(solveMarker: SolveMarker) {
+    return this.httpClient.put<Marker>(`${this.apiHost}/${this.baseUrl}/solve`, solveMarker);
   }
 }

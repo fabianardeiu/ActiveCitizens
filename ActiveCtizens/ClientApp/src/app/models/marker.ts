@@ -1,5 +1,5 @@
 export class Marker {
-  id: number;
+  id: string;
   latitude: number;
   longitude: number;
   description: string;
@@ -8,5 +8,6 @@ export class Marker {
   imageBytes: any;
   createdAt: Date;
   resolvedAt: Date;
-  citizen: string;
+  createdByCitizen: string;
+  resolvedByCitizen: string;
 }

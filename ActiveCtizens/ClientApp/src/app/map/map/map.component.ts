@@ -4,6 +4,7 @@ import { MarkerService } from '../../services/marker.service';
 import { Marker } from '../../models/marker';
 import { AddMarkerPopUpComponent } from '../add-marker-pop-up/add-marker-pop-up.component';
 import { Router } from '@angular/router';
+import { SolveMarker } from '../../models/solve-marker';
 
 @Component({
   selector: 'app-map',
@@ -42,7 +43,7 @@ export class MapComponent implements OnInit {
     this.marker.latitude = event.coords.lat;
     this.marker.longitude = event.coords.lng;
     this.marker.solved = false;
-    this.marker.citizen = localStorage.getItem('citizen');
+    this.marker.createdByCitizen = this.citizen;
     this.createMarkerDialog(this.marker);
   }
 
@@ -65,9 +66,13 @@ export class MapComponent implements OnInit {
   }
 
   solve(marker: Marker) {
-    this.markerService.solveMarker(marker.id).subscribe(res => {
+    let solveMarker = new SolveMarker();
+    solveMarker.markerId = marker.id;
+    solveMarker.citizen = this.citizen;
+    this.markerService.solveMarker(solveMarker).subscribe(res => {
       this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).solved = true;
       this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).resolvedAt = res.resolvedAt;
+      this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).resolvedByCitizen = res.resolvedByCitizen;
     });
   }
 

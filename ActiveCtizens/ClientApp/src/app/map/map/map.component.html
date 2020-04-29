@@ -17,9 +17,10 @@
         <agm-info-window>
           <div class="info-window-details">
             <h4>{{marker.description}}</h4>
-            <span>Created by: {{marker.citizen}}</span>
-            <span>Created at: {{marker.createdAt | date: 'dd-MMM-yyyy HH:mm'}}</span>
-            <span *ngIf="marker.resolvedAt">Resolved at: {{marker.resolvedAt | date: 'dd-MMM-yyyy HH:mm'}}</span>
+            <span>Created by: <i>{{marker.createdByCitizen}}</i></span>
+            <span>Created at: <i>{{marker.createdAt | date: 'dd-MMM-yyyy HH:mm'}}</i></span>
+            <span *ngIf="marker.solved">Resolved by: <i>{{marker.resolvedByCitizen}}</i></span>
+            <span *ngIf="marker.solved">Resolved at: <i>{{marker.resolvedAt | date: 'dd-MMM-yyyy HH:mm'}}</i></span>
             <hr />
             <img [src]="marker.image">
           </div>
@@ -29,11 +30,11 @@
                     (click)="getDirection(marker)">
               Direction
             </button>
-            <button *ngIf="marker.citizen != citizen"
+            <button *ngIf="marker.createdByCitizen != citizen"
                     mat-raised-button
                     (click)="solve(marker)"
                     color="primary">
-              Solved
+              Solve
             </button>
           </div>
         </agm-info-window>
