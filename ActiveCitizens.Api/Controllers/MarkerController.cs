@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ActiveCitizens.Core;
 using ActiveCitizens.Core.Dto;
+using ActiveCitizens.Core.DTOs;
 using ActiveCitizens.Core.Interfaces;
 using ActiveCitizens.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,24 +24,11 @@ namespace ActiveCitizens.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetMarkers()
+        public ActionResult<IEnumerable<MarkerViewModel>> GetMarkers()
         {
             var markers = _markerRepo.GetAll();
-            List<MarkerDto> markersDto = new List<MarkerDto>();
-            markers.ToList().ForEach(m => markersDto.Add(
-                new MarkerDto
-                {
-                    Id = m.Id,
-                    Description = m.Description,
-                    ImageBytes = m.Image,
-                    Latitude = m.Latitude,
-                    Longitude = m.Longitude,
-                    Solved = m.Solved,
-                    Citizen = m.Citizen.Name
-                }
-            ));
 
-            return Ok(markersDto);
+            return Ok(markers);
         }
 
         [HttpGet("{id}")]
@@ -51,37 +39,13 @@ namespace ActiveCitizens.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMarker([FromBody] MarkerDto markerDto)
+        public ActionResult<MarkerViewModel> CreateMarker([FromBody] MarkerDto markerDto)
         {
             if (ModelState.IsValid)
             {
-                Marker marker = new Marker
-                {
-                    Id = markerDto.Id,
-                    Description = markerDto.Description,
-                    Latitude = markerDto.Latitude,
-                    Longitude = markerDto.Longitude,
-                    Solved = markerDto.Solved,
-                    CitizenId = _context.Citizens.SingleOrDefault(c => c.Name == markerDto.Citizen).Id
-                };
-                if (markerDto.Image != null)
-                {
-                    marker.Image = Convert.FromBase64String(markerDto.Image);
-                }
-
-                var createdMarker = _markerRepo.Add(marker);
-
-                MarkerDto response = new MarkerDto
-                {
-                    Id = createdMarker.Id,
-                    Description = createdMarker.Description,
-                    Latitude = createdMarker.Latitude,
-                    Longitude = createdMarker.Longitude,
-                    Solved = createdMarker.Solved,
-                    Citizen = createdMarker.Citizen.Name,
-                    ImageBytes = createdMarker.Image
-                };
-                return Ok(response);
+                var markerViewModel = _markerRepo.Add(markerDto);
+                
+                return Ok(markerViewModel);
             }
             else
             {
@@ -89,16 +53,15 @@ namespace ActiveCitizens.Api.Controllers
             }
         }
      
-        [Route("{id}")]
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteMarker(int id)
         {
             _markerRepo.DeleteById(id);
             return Ok("Marker deleted");
         }
 
-        [HttpGet("{markerId}/solve")]
-        public IActionResult SolveMarker(int markerId)
+        [HttpPut("solve")]
+        public ActionResult<MarkerViewModel> SolveMarker([FromBody] int markerId)
         {
             var solvedMarker = _markerRepo.Solve(markerId);
             return Ok(solvedMarker);

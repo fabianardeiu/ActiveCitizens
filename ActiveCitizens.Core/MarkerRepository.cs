@@ -1,4 +1,6 @@
-﻿using ActiveCitizens.Core.Interfaces;
+﻿using ActiveCitizens.Core.Dto;
+using ActiveCitizens.Core.DTOs;
+using ActiveCitizens.Core.Interfaces;
 using ActiveCitizens.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,12 +19,35 @@ namespace ActiveCitizens.Core
             _context = context;
         }
 
-        public Marker Add(Marker marker)
+        public MarkerViewModel Add(MarkerDto markerDto)
         {
-            marker.CreatedAt = DateTime.Now;
+            Marker marker = new Marker
+            {
+                Id = markerDto.Id,
+                Description = markerDto.Description,
+                Image = markerDto.Image != null ? Convert.FromBase64String(markerDto.Image) : null,
+                Latitude = markerDto.Latitude,
+                Longitude = markerDto.Longitude,
+                CreatedAt = DateTime.Now,
+                Solved = markerDto.Solved,
+                CitizenId = _context.Citizens.SingleOrDefault(c => c.Name == markerDto.Citizen).Id
+            };
+
             _context.Markers.Add(marker);
             _context.SaveChanges();
-            return marker;
+
+            MarkerViewModel markerViewModel = new MarkerViewModel
+            {
+                Id = marker.Id,
+                Description = marker.Description,
+                Latitude = marker.Latitude,
+                Longitude = marker.Longitude,
+                Solved = marker.Solved,
+                Citizen = marker.Citizen.Name,
+                Image = marker.Image
+            };
+
+            return markerViewModel;
         }
 
         public void DeleteById(int id)
@@ -35,11 +60,27 @@ namespace ActiveCitizens.Core
             }
         }
 
-        public IEnumerable<Marker> GetAll()
+        public IEnumerable<MarkerViewModel> GetAll()
         {
-            return _context.Markers
+            var markers = _context.Markers
                 .Include(m => m.Citizen)
                 .Where(m => m.ResolvedAt == null || m.ResolvedAt > DateTime.Now.AddDays(-7));
+
+            List<MarkerViewModel> markersDto = new List<MarkerViewModel>();
+            markers.ToList().ForEach(m => markersDto.Add(
+                new MarkerViewModel
+                {
+                    Id = m.Id,
+                    Description = m.Description,
+                    Image = m.Image,
+                    Latitude = m.Latitude,
+                    Longitude = m.Longitude,
+                    Solved = m.Solved,
+                    Citizen = m.Citizen.Name
+                }
+            ));
+
+            return markersDto;
         }
 
         public Marker GetById(int id)
@@ -48,13 +89,30 @@ namespace ActiveCitizens.Core
             return marker;
         }
 
-        public Marker Solve(int markerId)
+        public MarkerViewModel Solve(int markerId)
         {
             var marker = _context.Markers.FirstOrDefault(m => m.Id == markerId);
             marker.Solved = true;
             marker.ResolvedAt = DateTime.Now;
             _context.SaveChanges();
-            return marker;
+
+            var solvedMarker = _context.Markers
+                                       .Include(m => m.Citizen)
+                                       .SingleOrDefault(m => m.Id == markerId);
+
+            var markerViewModel = new MarkerViewModel
+            {
+                Id = solvedMarker.Id,
+                Description = solvedMarker.Description,
+                Image = solvedMarker.Image,
+                Latitude = solvedMarker.Latitude,
+                Longitude = solvedMarker.Longitude,
+                Solved = solvedMarker.Solved,
+                ResolvedAt = solvedMarker.ResolvedAt,
+                Citizen = solvedMarker.Citizen.Name
+            };
+
+            return markerViewModel;
         }
     }
 }

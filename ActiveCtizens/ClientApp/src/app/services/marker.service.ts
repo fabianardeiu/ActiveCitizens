@@ -23,6 +23,6 @@ export class MarkerService {
   }
 
   solveMarker(markerId) {
-    return this.httpClient.get<Marker>(`${this.apiHost}/${this.baseUrl}/`+ markerId + `/solve`);
+    return this.httpClient.put<Marker>(`${this.apiHost}/${this.baseUrl}/solve`, markerId);
   }
 }

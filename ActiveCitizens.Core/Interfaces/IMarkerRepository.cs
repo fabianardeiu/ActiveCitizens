@@ -1,4 +1,6 @@
-﻿using ActiveCitizens.Models;
+﻿using ActiveCitizens.Core.Dto;
+using ActiveCitizens.Core.DTOs;
+using ActiveCitizens.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,11 +9,11 @@ namespace ActiveCitizens.Core.Interfaces
 {
     public interface IMarkerRepository
     {
-        Marker Add(Marker marker);
-        IEnumerable<Marker> GetAll();
+        MarkerViewModel Add(MarkerDto markerDto);
+        IEnumerable<MarkerViewModel> GetAll();
         Marker GetById(int id);
         void DeleteById(int id);
-        Marker Solve(int markerId);
+        MarkerViewModel Solve(int markerId);
 
     }
 }

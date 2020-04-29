@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ActiveCitizens.Core.Dto
+namespace ActiveCitizens.Core.DTOs
 {
-    public class MarkerDto
+    public class MarkerViewModel
     {
         public int Id { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Description { get; set; }
         public bool Solved { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public DateTime? ResolvedAt { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Citizen { get; set; }

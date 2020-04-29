@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Marker = /** @class */ (function () {
-    function Marker() {
+var MarkerDto = /** @class */ (function () {
+    function MarkerDto() {
     }
-    return Marker;
+    return MarkerDto;
 }());
-exports.Marker = Marker;
+exports.MarkerDto = MarkerDto;
 //# sourceMappingURL=marker.js.map

@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.markerService.getAll().subscribe(res => res.forEach(m => {
-      m.image = "data:image/jpeg;base64," + m.imageBytes;
+      m.image = "data:image/jpeg;base64," + m.image;
       this.markers = res;
     }))
   }
@@ -56,8 +56,7 @@ export class MapComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.markerService.createMarker(result).subscribe(res => {
-          res.image = "data:image/jpeg;base64," + res.imageBytes;
-          console.log(res);
+          res.image = "data:image/jpeg;base64," + res.image;
           this.markers.push(res);
         })
       }
