@@ -38,6 +38,7 @@ namespace ActiveCitizens.Core
         public IEnumerable<Marker> GetAll()
         {
             return _context.Markers
+                .Include(m => m.Citizen)
                 .Where(m => m.ResolvedAt == null || m.ResolvedAt > DateTime.Now.AddDays(-7));
         }
 

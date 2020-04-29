@@ -33,6 +33,7 @@ namespace ActiveCitizens.Api
 
             services.AddDbContext<ActiveCitizensContext>();
             services.AddScoped<IMarkerRepository, MarkerRepository>();
+            services.AddScoped<IAuthentificationService, AuthentificationService>();
 
             services.AddCors();
             services.AddMvc(option => option.EnableEndpointRouting = false);

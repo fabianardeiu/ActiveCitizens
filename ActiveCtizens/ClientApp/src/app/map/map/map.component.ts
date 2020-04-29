@@ -16,7 +16,7 @@ export class MapComponent implements OnInit {
   markerUrl: string;
   markers: Marker[] = [];
   marker: Marker;
-
+  citizen: string = localStorage.getItem('citizen');
   //map Configuration
   zoom = 14;
   lat: number = 45.751517;
@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.markerService.getAll().subscribe(res => res.forEach(m => {
-      m.image = "data:image/jpeg;base64," + m.image;
+      m.image = "data:image/jpeg;base64," + m.imageBytes;
       this.markers = res;
     }))
   }
@@ -42,6 +42,7 @@ export class MapComponent implements OnInit {
     this.marker.latitude = event.coords.lat;
     this.marker.longitude = event.coords.lng;
     this.marker.solved = false;
+    this.marker.citizen = localStorage.getItem('citizen');
     this.createMarkerDialog(this.marker);
   }
 
@@ -55,7 +56,8 @@ export class MapComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.markerService.createMarker(result).subscribe(res => {
-          res.image = "data:image/jpeg;base64," + res.image;
+          res.image = "data:image/jpeg;base64," + res.imageBytes;
+          console.log(res);
           this.markers.push(res);
         })
       }

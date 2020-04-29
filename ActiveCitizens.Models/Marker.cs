@@ -14,5 +14,7 @@ namespace ActiveCitizens.Models
         public byte[] Image { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ResolvedAt { get; set; }
+        public Guid CitizenId { get; set; }
+        public Citizen Citizen { get; set; }
     }
 }

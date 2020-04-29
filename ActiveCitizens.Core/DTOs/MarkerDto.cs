@@ -12,7 +12,9 @@ namespace ActiveCitizens.Core.Dto
         public string Description { get; set; }
         public bool Solved { get; set; }
         public string Image { get; set; }
+        public byte[] ImageBytes { get; set; }
         public DateTime? ResolvedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string Citizen { get; set; }
     }
 }

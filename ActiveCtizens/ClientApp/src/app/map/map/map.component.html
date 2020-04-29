@@ -17,6 +17,7 @@
         <agm-info-window>
           <div class="info-window-details">
             <h4>{{marker.description}}</h4>
+            <span>By: {{marker.citizen}}</span>
             <span>Created: {{marker.createdAt | date: 'dd-MMM-yyyy HH:mm'}}</span>
             <span *ngIf="marker.resolvedAt">Resolved: {{marker.resolvedAt | date: 'dd-MMM-yyyy HH:mm'}}</span>
             <hr />
@@ -28,7 +29,8 @@
                     (click)="getDirection(marker)">
               Direction
             </button>
-            <button mat-raised-button
+            <button *ngIf="marker.citizen != citizen"
+                    mat-raised-button
                     (click)="solve(marker)"
                     color="primary">
               Solved

@@ -5,6 +5,8 @@ export class Marker {
   description: string;
   solved: boolean;
   image: any;
+  imageBytes: any;
   createdAt: Date;
   resolvedAt: Date;
+  citizen: string;
 }

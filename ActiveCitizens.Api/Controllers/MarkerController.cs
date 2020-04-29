@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using ActiveCitizens.Core;
 using ActiveCitizens.Core.Dto;
 using ActiveCitizens.Core.Interfaces;
 using ActiveCitizens.Models;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActiveCitizens.Api.Controllers
@@ -16,17 +14,33 @@ namespace ActiveCitizens.Api.Controllers
     public class MarkerController : Controller
     {
         private IMarkerRepository _markerRepo;
+        private readonly ActiveCitizensContext _context = null;
 
-        public MarkerController(IMarkerRepository markerRepo)
+        public MarkerController(IMarkerRepository markerRepo, ActiveCitizensContext context)
         {
             _markerRepo = markerRepo;
+            _context = context;
         }
 
         [HttpGet]
         public IActionResult GetMarkers()
         {
             var markers = _markerRepo.GetAll();
-            return Ok(markers);
+            List<MarkerDto> markersDto = new List<MarkerDto>();
+            markers.ToList().ForEach(m => markersDto.Add(
+                new MarkerDto
+                {
+                    Id = m.Id,
+                    Description = m.Description,
+                    ImageBytes = m.Image,
+                    Latitude = m.Latitude,
+                    Longitude = m.Longitude,
+                    Solved = m.Solved,
+                    Citizen = m.Citizen.Name
+                }
+            ));
+
+            return Ok(markersDto);
         }
 
         [HttpGet("{id}")]
@@ -48,6 +62,7 @@ namespace ActiveCitizens.Api.Controllers
                     Latitude = markerDto.Latitude,
                     Longitude = markerDto.Longitude,
                     Solved = markerDto.Solved,
+                    CitizenId = _context.Citizens.SingleOrDefault(c => c.Name == markerDto.Citizen).Id
                 };
                 if (markerDto.Image != null)
                 {
@@ -55,7 +70,18 @@ namespace ActiveCitizens.Api.Controllers
                 }
 
                 var createdMarker = _markerRepo.Add(marker);
-                return Ok(createdMarker);
+
+                MarkerDto response = new MarkerDto
+                {
+                    Id = createdMarker.Id,
+                    Description = createdMarker.Description,
+                    Latitude = createdMarker.Latitude,
+                    Longitude = createdMarker.Longitude,
+                    Solved = createdMarker.Solved,
+                    Citizen = createdMarker.Citizen.Name,
+                    ImageBytes = createdMarker.Image
+                };
+                return Ok(response);
             }
             else
             {

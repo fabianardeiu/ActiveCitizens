@@ -11,6 +11,8 @@ namespace ActiveCitizens.Core
         private const string dbConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=ActiveCitizens;Trusted_Connection=True;";
         
         public DbSet<Marker> Markers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Citizen> Citizens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
