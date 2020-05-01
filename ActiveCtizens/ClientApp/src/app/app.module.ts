@@ -17,13 +17,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MapComponent } from './map/map/map.component';
 import { LoginComponent } from './login/login/login.component';
 import { AddMarkerPopUpComponent } from './map/add-marker-pop-up/add-marker-pop-up.component';
+import { RegisterComponent } from './register/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     LoginComponent,
-    AddMarkerPopUpComponent
+    AddMarkerPopUpComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

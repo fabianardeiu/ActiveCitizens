@@ -16,7 +16,7 @@ namespace ActiveCitizens.Api.Controllers
             _authService = authentificationService;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] UserDto userDto)
         {
             User user = new User
@@ -27,6 +27,13 @@ namespace ActiveCitizens.Api.Controllers
 
             var citizen = _authService.Login(user);
             return Ok(citizen);
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterUserDto registerUserDto)
+        {
+            _authService.Register(registerUserDto);
+            return Ok();
         }
     }
 }

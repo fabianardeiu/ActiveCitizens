@@ -43,6 +43,7 @@ namespace ActiveCitizens.Core
                 Latitude = marker.Latitude,
                 Longitude = marker.Longitude,
                 Solved = marker.Solved,
+                CreatedAt = marker.CreatedAt,
                 CreatedByCitizen = marker.CreatedByCitizen.Name,
                 Image = marker.Image
             };

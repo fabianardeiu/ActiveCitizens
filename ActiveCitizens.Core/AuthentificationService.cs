@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ActiveCitizens.Core
 {
@@ -29,6 +30,26 @@ namespace ActiveCitizens.Core
                 };
             }
             return null;
+        }
+
+        public void Register(RegisterUserDto registerUserDto)
+        {
+            var user = new User
+            {
+                Username = registerUserDto.Username,
+                Password = registerUserDto.Password
+            };
+
+            _context.Users.Add(user);
+
+            var citizen = new Citizen
+            {
+                Name = registerUserDto.Name,
+                UserId = user.Id
+            };
+            _context.Citizens.Add(citizen);
+
+            _context.SaveChanges();
         }
     }
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Citizen } from '../models/citizen';
+import { RegisterUser } from '../models/RegisterUser';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class AuthentificationService {
   }
 
   login(user: User): Observable<Citizen> {
-    return this.httpClient.post<Citizen>(`${this.apiHost}/${this.baseUrl}`, user);
+    return this.httpClient.post<Citizen>(`${this.apiHost}/${this.baseUrl}/login`, user);
+  }
+
+  register(registerUser: RegisterUser): Observable<RegisterUser> {
+    return this.httpClient.post<RegisterUser>(`${this.apiHost}/${this.baseUrl}/register`, registerUser);
+
   }
 }

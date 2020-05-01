@@ -78,7 +78,8 @@ export class MapComponent implements OnInit {
 
   getDirection(marker: Marker) {
     navigator.geolocation.getCurrentPosition(pos => {
-      this.origin = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      //this.origin = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      this.origin = { lat: 45.75999716308822, lng: 21.238251328468326 };
       this.destination = { lat: marker.latitude, lng: marker.longitude };
     })
   }

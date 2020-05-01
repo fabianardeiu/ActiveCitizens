@@ -1,5 +1,6 @@
 agm-map {
-  height: 100vh;
+  height: calc(100vh - 64px); /*64 is toolbar height*/
+  overflow: hidden;
 }
 
 .info-window-details h4{
