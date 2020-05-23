@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../../services/authentification.service';
 import { RegisterUser } from '../../models/RegisterUser';
+import { SimpleSnackBarService } from '../../services/simple-snack-bar.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthentificationService
+    private authService: AuthentificationService,
+    private snackBar: SimpleSnackBarService
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +36,13 @@ export class RegisterComponent implements OnInit {
       registerUser.username = this.form.controls['username'].value;
       registerUser.password = this.form.controls['password'].value;
 
-      this.authService.register(registerUser).subscribe(() => this.router.navigate(['']));
+      this.authService.register(registerUser).subscribe(() => {
+        this.router.navigate(['']);
+        this.snackBar.openSuccess('User successfully created');
+      });
     }
   }
+
+
 
 }

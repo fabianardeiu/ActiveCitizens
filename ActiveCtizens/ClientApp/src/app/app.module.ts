@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatTableModule } from '@angular/material/table';
 import { LeaderboardComponent } from './map/leaderboard/leaderboard.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LeaderboardComponent } from './map/leaderboard/leaderboard.component';
     MatCardModule,
     MatMenuModule,
     MatBottomSheetModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

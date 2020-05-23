@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SolveMarker } from '../../models/solve-marker';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
+import { SimpleSnackBarService } from '../../services/simple-snack-bar.service';
 
 @Component({
   selector: 'app-map',
@@ -37,7 +38,8 @@ export class MapComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private markerService: MarkerService,
     private router: Router,
-    private _bottomSheet: MatBottomSheet) {
+    private _bottomSheet: MatBottomSheet,
+    private snackBar: SimpleSnackBarService) {
   }
 
   ngOnInit(): void {
@@ -120,7 +122,8 @@ export class MapComponent implements OnInit {
         this.markerService.createMarker(result).subscribe(res => {
           res.image = "data:image/jpeg;base64," + res.image;
           this.markers.push(res);
-        })
+        });
+        this.snackBar.openSuccess('Marker successfully created')
       }
     });
     dialogRef = null;
@@ -134,6 +137,7 @@ export class MapComponent implements OnInit {
       this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).solved = true;
       this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).resolvedAt = res.resolvedAt;
       this.markers.find(m => m.latitude == marker.latitude && m.longitude == marker.longitude).resolvedByCitizen = res.resolvedByCitizen;
+      this.snackBar.openSuccess('Marker successfully solved')
     });
   }
 

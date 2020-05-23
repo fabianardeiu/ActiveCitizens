@@ -1,73 +1,78 @@
-  <div class="toolbar">
-    <mat-toolbar color="primary">
+<div class="toolbar" *ngIf="origin==undefined">
+  <mat-toolbar color="primary">
 
-      <div class="marks-menu">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
+    <div class="marks-menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+
+        <button mat-menu-item (click)="getAll()" [ngClass]="{'active': all == true}">
+          <span><mat-icon>place</mat-icon>All</span>
         </button>
-        <mat-menu #menu="matMenu">
 
-          <button mat-menu-item (click)="getAll()" [ngClass]="{'active': all == true}">
-            <span><mat-icon>place</mat-icon>All</span>
+        <button mat-menu-item (click)="getMine()" [ngClass]="{'active': mine == true}">
+          <span><mat-icon>person</mat-icon>Mine</span>
+        </button>
+
+        <button mat-menu-item (click)="getAllSolved()" [ngClass]="{'active': solved == true}">
+          <span><mat-icon>person_pin_circle</mat-icon>Solved</span>
+        </button>
+
+        <button mat-menu-item (click)="getAllActive()" [ngClass]="{'active': active == true}">
+          <span><mat-icon>not_listed_location</mat-icon>Active</span>
+        </button>
+
+      </mat-menu>
+
+      <button mat-icon-button (click)="openBottomSheet()"><mat-icon>poll</mat-icon></button>
+    </div>
+
+    <mat-icon (click)="logout()" style="cursor:pointer; margin-left:auto; margin-right:0;">logout</mat-icon>
+  </mat-toolbar>
+</div>
+
+<div *ngIf="origin!=undefined">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="cancelDirection()"><mat-icon>cancel</mat-icon></button>
+  </mat-toolbar>
+</div>
+
+<div class="map">
+  <agm-map [latitude]="lat"
+           [longitude]="lng"
+           [zoom]="zoom"
+           (mapClick)="createMarker($event);">
+
+    <agm-marker [iconUrl]="(marker.solved==true)?'./assets/icon.png':''"
+                *ngFor="let marker of markers"
+                [latitude]="marker.latitude"
+                [longitude]="marker.longitude">
+      <agm-info-window>
+        <div class="info-window-details">
+          <h4>{{marker.description}}</h4>
+          <span>Created by: <i>{{marker.createdByCitizen}}</i></span>
+          <span>Created at: <i>{{marker.createdAt | date: 'dd-MMM-yyyy HH:mm'}}</i></span>
+          <span *ngIf="marker.solved">Resolved by: <i>{{marker.resolvedByCitizen}}</i></span>
+          <span *ngIf="marker.solved">Resolved at: <i>{{marker.resolvedAt | date: 'dd-MMM-yyyy HH:mm'}}</i></span>
+          <hr />
+          <img [src]="marker.image">
+        </div>
+        <div class="info-window-actions"
+             *ngIf="!marker.solved">
+          <button mat-raised-button
+                  (click)="getDirection(marker)">
+            Direction
           </button>
-
-          <button mat-menu-item (click)="getMine()" [ngClass]="{'active': mine == true}">
-            <span><mat-icon>person</mat-icon>Mine</span>
+          <button *ngIf="marker.createdByCitizen != citizen"
+                  mat-raised-button
+                  (click)="solve(marker)"
+                  color="primary">
+            Solve
           </button>
-
-          <button mat-menu-item (click)="getAllSolved()" [ngClass]="{'active': solved == true}">
-            <span><mat-icon>person_pin_circle</mat-icon>Solved</span>
-          </button>
-
-          <button mat-menu-item (click)="getAllActive()" [ngClass]="{'active': active == true}">
-            <span><mat-icon>not_listed_location</mat-icon>Active</span>
-          </button>
-
-        </mat-menu>
-
-        <button mat-icon-button (click)="openBottomSheet()"><mat-icon>arrow_left</mat-icon></button>
-      </div>
-
-      <mat-icon *ngIf="origin!=undefined" (click)="cancelDirection()" style="cursor:pointer">cancel</mat-icon>
-      <mat-icon (click)="logout()" style="cursor:pointer; margin-left:auto; margin-right:0;">logout</mat-icon>
-    </mat-toolbar>
-  </div>
-
-  <div class="map">
-    <agm-map [latitude]="lat"
-             [longitude]="lng"
-             [zoom]="zoom"
-             (mapClick)="createMarker($event);">
-
-      <agm-marker [iconUrl]="(marker.solved==true)?'./assets/icon.png':''"
-                  *ngFor="let marker of markers"
-                  [latitude]="marker.latitude"
-                  [longitude]="marker.longitude">
-        <agm-info-window>
-          <div class="info-window-details">
-            <h4>{{marker.description}}</h4>
-            <span>Created by: <i>{{marker.createdByCitizen}}</i></span>
-            <span>Created at: <i>{{marker.createdAt | date: 'dd-MMM-yyyy HH:mm'}}</i></span>
-            <span *ngIf="marker.solved">Resolved by: <i>{{marker.resolvedByCitizen}}</i></span>
-            <span *ngIf="marker.solved">Resolved at: <i>{{marker.resolvedAt | date: 'dd-MMM-yyyy HH:mm'}}</i></span>
-            <hr />
-            <img [src]="marker.image">
-          </div>
-          <div class="info-window-actions"
-               *ngIf="!marker.solved">
-            <button mat-raised-button
-                    (click)="getDirection(marker)">
-              Direction
-            </button>
-            <button *ngIf="marker.createdByCitizen != citizen"
-                    mat-raised-button
-                    (click)="solve(marker)"
-                    color="primary">
-              Solve
-            </button>
-          </div>
-        </agm-info-window>
-      </agm-marker>
-      <agm-direction *ngIf="origin!=undefined" [origin]="origin" [destination]="destination" [visible]="true"></agm-direction>
-    </agm-map>
-  </div>
+        </div>
+      </agm-info-window>
+    </agm-marker>
+    <agm-direction *ngIf="origin!=undefined" [origin]="origin" [destination]="destination" [visible]="true"></agm-direction>
+  </agm-map>
+</div>
