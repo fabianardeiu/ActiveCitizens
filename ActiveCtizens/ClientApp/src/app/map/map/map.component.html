@@ -1,9 +1,38 @@
   <div class="toolbar">
     <mat-toolbar color="primary">
+
+      <div class="marks-menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+
+          <button mat-menu-item (click)="getAll()" [ngClass]="{'active': all == true}">
+            <span><mat-icon>place</mat-icon>All</span>
+          </button>
+
+          <button mat-menu-item (click)="getMine()" [ngClass]="{'active': mine == true}">
+            <span><mat-icon>person</mat-icon>Mine</span>
+          </button>
+
+          <button mat-menu-item (click)="getAllSolved()" [ngClass]="{'active': solved == true}">
+            <span><mat-icon>person_pin_circle</mat-icon>Solved</span>
+          </button>
+
+          <button mat-menu-item (click)="getAllActive()" [ngClass]="{'active': active == true}">
+            <span><mat-icon>not_listed_location</mat-icon>Active</span>
+          </button>
+
+        </mat-menu>
+
+        <button mat-icon-button (click)="openBottomSheet()"><mat-icon>supervisor_account</mat-icon></button>
+      </div>
+
       <mat-icon *ngIf="origin!=undefined" (click)="cancelDirection()" style="cursor:pointer">cancel</mat-icon>
       <mat-icon (click)="logout()" style="cursor:pointer; margin-left:auto; margin-right:0;">logout</mat-icon>
     </mat-toolbar>
   </div>
+
   <div class="map">
     <agm-map [latitude]="lat"
              [longitude]="lng"

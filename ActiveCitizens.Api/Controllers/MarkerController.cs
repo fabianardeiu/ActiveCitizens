@@ -15,15 +15,13 @@ namespace ActiveCitizens.Api.Controllers
     public class MarkerController : Controller
     {
         private IMarkerRepository _markerRepo;
-        private readonly ActiveCitizensContext _context = null;
 
-        public MarkerController(IMarkerRepository markerRepo, ActiveCitizensContext context)
+        public MarkerController(IMarkerRepository markerRepo)
         {
             _markerRepo = markerRepo;
-            _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult<IEnumerable<MarkerViewModel>> GetMarkers()
         {
             var markers = _markerRepo.GetAll();
@@ -65,6 +63,30 @@ namespace ActiveCitizens.Api.Controllers
         {
             var solvedMarker = _markerRepo.Solve(solveMarkerDto.MarkerId, solveMarkerDto.Citizen);
             return Ok(solvedMarker);
+        }
+
+        [HttpGet("all/solved")]
+        public ActionResult<IEnumerable<MarkerViewModel>> GetSolvedMarkers()
+        {
+            var markers = _markerRepo.GetSolvedMarkers();
+
+            return Ok(markers);
+        }
+
+        [HttpGet("all/mine")]
+        public ActionResult<IEnumerable<MarkerViewModel>> GetCitizenMarkers([FromQuery] string citizen)
+        {
+            var markers = _markerRepo.GetMarkersCreatedByCitizen(citizen);
+
+            return Ok(markers);
+        }
+
+        [HttpGet("all/active")]
+        public ActionResult<IEnumerable<MarkerViewModel>> GetActiveMarkers()
+        {
+            var markers = _markerRepo.GetAllActiveMarkers();
+
+            return Ok(markers);
         }
     }
 }

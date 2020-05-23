@@ -1,0 +1,36 @@
+<h3 style="text-align:center; padding:10px;">Leaderboard</h3>
+<mat-table [dataSource]="citizens" class="mat-elevation-z8">
+  <!-- Rank Column -->
+  <ng-container matColumnDef="rank">
+    <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index"> {{i+1}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef > Name </mat-header-cell>
+    <mat-cell *matCellDef="let element;"  style="margin-right:15px;"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <!-- Solved Column -->
+  <ng-container matColumnDef="solvedMarks">
+    <mat-header-cell *matHeaderCellDef> Solved </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.solved}} </mat-cell>
+  </ng-container>
+
+  <!-- Created Column -->
+  <ng-container matColumnDef="createdMarks">
+    <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.created}} </mat-cell>
+  </ng-container>
+
+  <!-- Score Column -->
+  <ng-container matColumnDef="score">
+    <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.score}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+

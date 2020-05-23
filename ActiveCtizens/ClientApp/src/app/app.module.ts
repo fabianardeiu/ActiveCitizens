@@ -18,6 +18,10 @@ import { MapComponent } from './map/map/map.component';
 import { LoginComponent } from './login/login/login.component';
 import { AddMarkerPopUpComponent } from './map/add-marker-pop-up/add-marker-pop-up.component';
 import { RegisterComponent } from './register/register/register.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatTableModule } from '@angular/material/table';
+import { LeaderboardComponent } from './map/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { RegisterComponent } from './register/register/register.component';
     MapComponent,
     LoginComponent,
     AddMarkerPopUpComponent,
-    RegisterComponent
+    RegisterComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +50,9 @@ import { RegisterComponent } from './register/register/register.component';
     MatToolbarModule,
     AppRoutingModule,
     MatCardModule,
+    MatMenuModule,
+    MatBottomSheetModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

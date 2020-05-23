@@ -5,6 +5,8 @@ import { Marker } from '../../models/marker';
 import { AddMarkerPopUpComponent } from '../add-marker-pop-up/add-marker-pop-up.component';
 import { Router } from '@angular/router';
 import { SolveMarker } from '../../models/solve-marker';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 
 @Component({
   selector: 'app-map',
@@ -26,16 +28,75 @@ export class MapComponent implements OnInit {
   origin: any;
   destination: any;
 
+  //menu options
+  all: boolean;
+  mine: boolean;
+  solved: boolean;
+  active: boolean;
+
   constructor(private dialog: MatDialog,
     private markerService: MarkerService,
-    private router: Router,) {
+    private router: Router,
+    private _bottomSheet: MatBottomSheet) {
   }
 
   ngOnInit(): void {
-    this.markerService.getAll().subscribe(res => res.forEach(m => {
-      m.image = "data:image/jpeg;base64," + m.image;
+    this.getAll();
+  }
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(LeaderboardComponent);
+  }
+
+  getMine() {
+    this.setAllMenuOptionsInactive();
+    this.markerService.getMine(this.citizen).subscribe(res => {
+      res.forEach(m => {
+        m.image = "data:image/jpeg;base64," + m.image;
+      });
       this.markers = res;
-    }))
+    });
+    this.mine = true;
+  }
+
+  getAll() {
+    this.setAllMenuOptionsInactive();
+    this.markerService.getAll().subscribe(res => {
+      res.forEach(m => {
+        m.image = "data:image/jpeg;base64," + m.image;
+      });
+      this.markers = res;
+    });
+    this.all = true;
+  }
+
+  getAllSolved() {
+    this.setAllMenuOptionsInactive();
+    this.markerService.getSolvedMarkers().subscribe(res => {
+      res.forEach(m => {
+        m.image = "data:image/jpeg;base64," + m.image;
+      });
+      this.markers = res;
+    });
+    this.solved = true;
+  }
+
+  getAllActive() {
+    this.setAllMenuOptionsInactive();
+    this.markerService.getActiveMarkers().subscribe(res => {
+      res.forEach(m => {
+        m.image = "data:image/jpeg;base64," + m.image;
+      });
+      this.markers = res;
+    });
+    this.active = true;
+  }
+
+  setAllMenuOptionsInactive() {
+    this.all = false;
+    this.mine = false;
+    this.solved = false;
+    this.active = false;
   }
 
   createMarker(event) {
@@ -83,6 +144,7 @@ export class MapComponent implements OnInit {
       this.destination = { lat: marker.latitude, lng: marker.longitude };
     })
   }
+
 
   cancelDirection() {
     this.origin = undefined;

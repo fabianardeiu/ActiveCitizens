@@ -10,6 +10,9 @@ namespace ActiveCitizens.Core.Interfaces
     {
         MarkerViewModel Add(MarkerDto markerDto);
         IEnumerable<MarkerViewModel> GetAll();
+        IEnumerable<MarkerViewModel> GetSolvedMarkers();
+        IEnumerable<MarkerViewModel> GetMarkersCreatedByCitizen(string citizen);
+        IEnumerable<MarkerViewModel> GetAllActiveMarkers();
         Marker GetById(Guid id);
         void DeleteById(Guid id);
         MarkerViewModel Solve(Guid markerId, string citizen);

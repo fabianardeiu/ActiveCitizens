@@ -16,7 +16,7 @@ export class MarkerService {
   }
 
   getAll(): Observable<Marker[]> {
-    return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}`);
+    return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}/all`);
   }
 
   createMarker(marker: Marker) {
@@ -25,5 +25,17 @@ export class MarkerService {
 
   solveMarker(solveMarker: SolveMarker) {
     return this.httpClient.put<Marker>(`${this.apiHost}/${this.baseUrl}/solve`, solveMarker);
+  }
+
+  getSolvedMarkers(): Observable<Marker[]> {
+    return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}/all/solved`);
+  }
+
+  getMine(citizen:string): Observable<Marker[]> {
+    return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}/all/mine?citizen=` + citizen);
+  }
+
+  getActiveMarkers(): Observable<Marker[]> {
+    return this.httpClient.get<Marker[]>(`${this.apiHost}/${this.baseUrl}/all/active`);
   }
 }

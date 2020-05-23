@@ -26,3 +26,7 @@ img {
 .info-window-actions button {
   margin: 0 0.5em 0.3em 0;
 }
+
+.active {
+  background-color: rgb(225, 226, 230);
+}

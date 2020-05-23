@@ -65,8 +65,88 @@ namespace ActiveCitizens.Core
         {
             var markers = _context.Markers
                 .Include(m => m.CreatedByCitizen)
+                .Include(m => m.ResolvedByCitizen);
+
+            List<MarkerViewModel> markersDto = new List<MarkerViewModel>();
+            markers.ToList().ForEach(m => markersDto.Add(
+                new MarkerViewModel
+                {
+                    Id = m.Id,
+                    Description = m.Description,
+                    Image = m.Image,
+                    Latitude = m.Latitude,
+                    Longitude = m.Longitude,
+                    Solved = m.Solved,
+                    CreatedAt = m.CreatedAt,
+                    ResolvedAt = m.ResolvedAt != null ? m.ResolvedAt : null,
+                    CreatedByCitizen = m.CreatedByCitizen.Name,
+                    ResolvedByCitizen = m.ResolvedByCitizen != null ? m.ResolvedByCitizen.Name : null
+                }
+            ));
+
+            return markersDto;
+        }
+
+        public IEnumerable<MarkerViewModel> GetSolvedMarkers()
+        {
+            var markers = _context.Markers
+                .Include(m => m.CreatedByCitizen)
                 .Include(m => m.ResolvedByCitizen)
-                .Where(m => m.ResolvedAt == null || m.ResolvedAt > DateTime.Now.AddDays(-7));
+                .Where(m => m.ResolvedAt != null);
+
+            List<MarkerViewModel> markersDto = new List<MarkerViewModel>();
+            markers.ToList().ForEach(m => markersDto.Add(
+                new MarkerViewModel
+                {
+                    Id = m.Id,
+                    Description = m.Description,
+                    Image = m.Image,
+                    Latitude = m.Latitude,
+                    Longitude = m.Longitude,
+                    Solved = m.Solved,
+                    CreatedAt = m.CreatedAt,
+                    ResolvedAt = m.ResolvedAt != null ? m.ResolvedAt : null,
+                    CreatedByCitizen = m.CreatedByCitizen.Name,
+                    ResolvedByCitizen = m.ResolvedByCitizen != null ? m.ResolvedByCitizen.Name : null
+                }
+            ));
+
+            return markersDto;
+        }
+
+        public IEnumerable<MarkerViewModel> GetMarkersCreatedByCitizen(string citizen)
+        {
+            var markers = _context.Markers
+                .Include(m => m.CreatedByCitizen)
+                .Include(m => m.ResolvedByCitizen)
+                .Where(m => m.ResolvedByCitizen.Name == citizen || m.CreatedByCitizen.Name == citizen);
+
+            List<MarkerViewModel> markersDto = new List<MarkerViewModel>();
+            markers.ToList().ForEach(m => markersDto.Add(
+                new MarkerViewModel
+                {
+                    Id = m.Id,
+                    Description = m.Description,
+                    Image = m.Image,
+                    Latitude = m.Latitude,
+                    Longitude = m.Longitude,
+                    Solved = m.Solved,
+                    CreatedAt = m.CreatedAt,
+                    ResolvedAt = m.ResolvedAt != null ? m.ResolvedAt : null,
+                    CreatedByCitizen = m.CreatedByCitizen.Name,
+                    ResolvedByCitizen = m.ResolvedByCitizen != null ? m.ResolvedByCitizen.Name : null
+                }
+            ));
+
+            return markersDto;
+        }
+
+        public IEnumerable<MarkerViewModel> GetAllActiveMarkers()
+        {
+            var markers = _context.Markers
+             .Include(m => m.CreatedByCitizen)
+             .Include(m => m.ResolvedByCitizen)
+             .Where(m => m.ResolvedAt == null);
 
             List<MarkerViewModel> markersDto = new List<MarkerViewModel>();
             markers.ToList().ForEach(m => markersDto.Add(
@@ -121,5 +201,7 @@ namespace ActiveCitizens.Core
 
             return markerViewModel;
         }
+
+      
     }
 }
